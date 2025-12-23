@@ -1,14 +1,30 @@
 <template>
-  <h1>Reaction Timer</h1>
+  <h1>Ninja Reaction Timer</h1>
+  <button @click="start" :disabled="isPlaying">Start</button>
+  <Block v-if="isPlaying" :delay="delay" />
+
 </template>
 
 <script>
+import Block from "./components/Block.vue";
 
 export default {
-  name: 'App',
-  components: {
-  }
-}
+  name: "App",
+  components: { Block },
+  data() {
+    return {
+      isPlaying: false,
+      delay: null,
+    };
+  },
+  methods: {
+    start() {
+      this.delay = 2000 + Math.random() * 5000;
+      this.isPlaying = true;
+      console.log(`Game started! Wait for the signal...${this.delay}ms`);
+    },
+  },
+};
 </script>
 
 <style>
